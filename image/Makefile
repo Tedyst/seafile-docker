@@ -1,4 +1,4 @@
-server_version=7.0.11
+server_version=7.1.5
 
 base_image=ghcr.io/tedyst/seafile-docker/base-mc:18.04
 base_image_squashed=ghcr.io/tedyst/seafile-docker/base-mc:18.04-squashed

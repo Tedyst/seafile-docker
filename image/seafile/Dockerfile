@@ -10,16 +10,16 @@ RUN mkdir -p /etc/my_init.d
 ENV SEAFILE_VERSION=7.1.5 SEAFILE_SERVER=seafile-server
 
 RUN mkdir -p /opt/seafile/ && \
-    if [[ $(uname -m) == *"x86_64"* ]]; \
+    bash -c 'if [[ $(uname -m) == *"x86_64"* ]]; \
     then \
-    curl -sSL -o - https://download.seadrive.org/seafile-server_${SEAFILE_VERSION}_$(uname -m).tar.gz ;\
+    curl -sSL -o - https://download.seadrive.org/seafile-server_${SEAFILE_VERSION}_x86-64.tar.gz ;\
     elif [[ $(uname -m) == *"v7"* ]]; \
     then \
     curl -sSL -o - https://github.com/haiwen/seafile-rpi/releases/download/v${SEAFILE_VERSION}/seafile-server-${SEAFILE_VERSION}-bionic-armv7.tar.gz ;\
     else \
     curl -sSL -o - https://github.com/haiwen/seafile-rpi/releases/download/v${SEAFILE_VERSION}/seafile-server-${SEAFILE_VERSION}-bionic-arm64.tar.gz ;\
     fi \
-    | tar xzf - -C /opt/seafile/
+    | tar xzf - -C /opt/seafile/'
 
 # For using TLS connection to LDAP/AD server with docker-ce.
 RUN find /opt/seafile/ \( -name "liblber-*" -o -name "libldap-*" -o -name "libldap_r*" -o -name "libsasl2.so*" \) -delete
